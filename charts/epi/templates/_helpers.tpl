@@ -63,6 +63,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Selector labels for leaflet reader
+*/}}
+{{- define "epi.leafletReaderSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "epi.name" . }}LeafletReader
+app.kubernetes.io/instance: {{ .Release.Name }}LeafletReader
+{{- end }}
+
+{{/*
 Selector labels for runner used by kubectl --selector=key1=value1,key2=value2
 */}}
 {{- define "epi.selectorLabelsKubectl" -}}
@@ -143,9 +151,10 @@ Configuration env.json
 {
   "PSK_TMP_WORKING_DIR": "tmp",
   "PSK_CONFIG_LOCATION": "../apihub-root/external-volume/config",
-  "DEV": false,
+  "DEV": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "VAULT_DOMAIN": {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote}},
   "BUILD_SECRET_KEY": {{ required "config.buildSecretKey must be set" .Values.config.buildSecretKey | quote}},
+  "SSO_SECRETS_ENCRYPTION_KEY": {{ required "config.ssoSecretsEncryptionKey must be set" .Values.config.ssoSecretsEncryptionKey | quote}},
   "BDNS_ROOT_HOSTS": "http://127.0.0.1:8080",
   "OPENDSU_ENABLE_DEBUG": true
 }
@@ -153,7 +162,7 @@ Configuration env.json
 
 {{/*
 Configuration apihub.json.
-Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json
+Taken from https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json
 */}}
 {{- define "epi.apihubJson" -}}
 {
@@ -255,6 +264,51 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
   },
   "serverAuthentication": false
 }
+{{- end }}
+
+{{/*
+Configuration apihub.json for read only mode
+*/}}
+{{- define "epi.readOnlyApihubJson" -}}
+{
+  "storage": "../apihub-root",
+  "port": 8080,
+  "preventRateLimit": true,
+  "activeComponents": [
+    "bdns",
+    "bricking",
+    "anchoring",
+    "leaflet-web-api",
+    "get-gtin-owner",
+    "debugLogger",
+    "staticServer"
+  ],
+  "componentsConfig": {
+    "leaflet-web-api": {
+      "module": "./../../gtin-resolver",
+      "function": "getWebLeaflet"
+    },
+    "get-gtin-owner": {
+      "module": "./../../gtin-resolver",
+      "function": "getGTINOwner"
+    },
+    "staticServer": {
+      "excludedFiles": [
+        ".*.secret"
+      ]
+    },
+    "bricking": {},
+    "anchoring": {}
+  },
+  "responseHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "enableRequestLogger": true,
+  "enableJWTAuthorisation": false,
+  "enableOAuth": false,
+  "enableLocalhostAuthorization": false
+  }
 {{- end }}
 
 {{/*

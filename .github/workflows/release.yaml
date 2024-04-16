@@ -9,7 +9,9 @@ on:
   push:
     branches:
       - master
-      - 3.0.0-rc3
+      - main
+  workflow_dispatch:
+      
 
 jobs:
   release:

@@ -75,7 +75,8 @@ data:
           }
         ],
         "chainId": 10,
-        "isQuorum": true,
+        "isQuorum": false,
+        "enableGasPriceBlock":0,
         "istanbul": {
           "epoch": 30000,
           "policy": 0
