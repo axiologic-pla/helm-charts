@@ -2,8 +2,23 @@ apiVersion: v1
 entries:
   epi:
   - apiVersion: v2
+    appVersion: 3.0.0
+    created: "2024-04-16T19:04:04.392761756+03:00"
+    description: A Helm chart for Pharma Ledger epi (electronic product information)
+      application
+    digest: bc90b689a9e0e1f9f3ae760ffebfbe5e047a32515adfffc74edf850418d48f80
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: epi
+    type: application
+    urls:
+    - https://axiologic-pla.github.io/helm-charts/epi-0.6.27.tgz
+    version: 0.6.27
+  - apiVersion: v2
     appVersion: 2023.1.0
-    created: "2024-04-16T18:57:03.982326762+03:00"
+    created: "2024-04-16T19:04:04.39429117+03:00"
     description: A Helm chart for Pharma Ledger epi (electronic product information)
       application
     digest: 5a4cf753332cf095a79deca5dab2573e19243f5121df66c58b8d7fae9dbd6490
@@ -16,4 +31,31 @@ entries:
     urls:
     - https://axiologic-pla.github.io/helm-charts/epi-0.6.5.tgz
     version: 0.6.5
-generated: "2024-04-16T18:57:03.979830701+03:00"
+  ethadapter:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2024-04-16T19:04:04.396731776+03:00"
+    description: A Helm chart for Pharma Ledger Ethereum Adapter Service
+    digest: 8537ecf1379fc43fe878991036a77596f65b4a87abf147f67f493f1ae88c48b1
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: ethadapter
+    type: application
+    urls:
+    - https://axiologic-pla.github.io/helm-charts/ethadapter-0.7.14.tgz
+    version: 0.7.14
+  quorum-node:
+  - apiVersion: v2
+    appVersion: 23.4.0
+    created: "2024-04-16T19:04:04.402331119+03:00"
+    description: A Helm chart for the deployment of the quorum node on Kubernetes
+      supporting new-network, join-network and update-partners-info use cases.
+    digest: fdac92798fb3abe8b41d4854abc1df045715a84439b5d60217df2a7292c3c558
+    name: quorum-node
+    type: application
+    urls:
+    - https://axiologic-pla.github.io/helm-charts/quorum-node-0.6.8.tgz
+    version: 0.6.8
+generated: "2024-04-16T19:04:04.391051754+03:00"
