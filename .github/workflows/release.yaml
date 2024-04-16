@@ -43,11 +43,11 @@ jobs:
                   charts_dir: charts
                   config: cr.yaml # If you have a config file
                 env:
-                  GH_TOKEN: "${{ secrets.GIT_TOKEN }}"
                   CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
             fi
           done
-
+        env: 
+          GH_TOKEN: "${{ secrets.GIT_TOKEN }}"
       # Keep the original logic for 'on push' behavior if needed
       - name: Run chart-releaser (on push) 
         if: ${{ github.event_name == 'push' }} 
