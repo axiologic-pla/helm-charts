@@ -1,26 +1,21 @@
-#
-# Runs the "Chart Releaser" https://github.com/helm/chart-releaser-action on push to main branch (e.g. on a succesful merge from a Pull Request).
-# 1. The "Chart Releaser" creates a GitHub Release for each Chart that has changed
-# 2. and updates the "index.yaml" of the Helm Repository in branch "gh-pages" (GitHub Pages).
-#
 name: Release Charts
 
 on:
-  push:
-    branches:
-      - master
-      - main
-  workflow_dispatch:
-      
+  create:
+    tags:
+      - '*' # Pattern to match all tags
+  workflow_dispatch:  # Keep manual option
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
-        name: Checkout
+      - uses: actions/checkout@v3 
         with:
           fetch-depth: 0
+
+      - name: Fetch all Tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* 
 
       - name: Configure Git
         run: |
@@ -36,11 +31,28 @@ jobs:
           pathInArchive: linux-amd64/helm
       - run: helm version
 
-      # https://github.com/helm/chart-releaser-action
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@c25b74a986eb925b398320414b576227f375f946 # v1.2.1
+      - name: Process Pre-Existing Tags
+        run: |
+          for tag in $(git tag -l); do
+            # Check if release exists (adapt this logic)
+            if ! [[ $(gh release list | grep $tag) ]]; then 
+              helm package charts/$tag  # Assuming charts are tagged with dir
+              # Use chart-releaser-action to create a release here
+              helm/chart-releaser-action@v1.2.1 # Specify version
+                with:
+                  charts_dir: charts
+                  config: cr.yaml # If you have a config file
+                env:
+                  CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
+            fi
+          done
+
+      # Keep the original logic for 'on push' behavior if needed
+      - name: Run chart-releaser (on push) 
+        if: ${{ github.event_name == 'push' }} 
+        uses: helm/chart-releaser-action@v1.2.1 
         with:
           charts_dir: charts
-          #config: cr.yaml
+          config: cr.yaml
         env:
-          CR_TOKEN: "${{ secrets.GIT_TOKEN }}"
+          CR_TOKEN: "${{ secrets.GIT_TOKEN }}" 
