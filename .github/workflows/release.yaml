@@ -36,7 +36,7 @@ jobs:
           for tag in $(git tag -l); do
             # Check if release exists (adapt this logic)
             if ! [[ $(gh release list | grep $tag) ]]; then 
-              helm package charts/$tag  # Assuming charts are tagged with dir
+              git checkout $tag
               # Use chart-releaser-action to create a release here
               helm/chart-releaser-action@v1.2.1 # Specify version
                 with:
