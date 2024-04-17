@@ -33,10 +33,16 @@ jobs:
 
       - name: Process Pre-Existing Tags
         run: |
+          echo "Processing pre-existing tags..."
+          echo "Current working directory: $(pwd)"
+          ls -la
           for tag in $(git tag -l); do
             # Check if release exists (adapt this logic)
             if ! [[ $(gh release list | grep $tag) ]]; then 
               git checkout $tag
+              echo "Processing tag: $tag"
+              echo "Current working directory: $(pwd)"
+              ls -la
               # Use chart-releaser-action to create a release here
               helm/chart-releaser-action@v1.2.1 # Specify version
                 with:
