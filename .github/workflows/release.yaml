@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - master
+      - main
       - 3.0.0-rc3
   workflow_dispatch:
 
