@@ -58,6 +58,20 @@ entries:
   ethadapter:
   - apiVersion: v2
     appVersion: 3.0.0
+    created: "2024-04-24T11:39:33.356415218Z"
+    description: A Helm chart for Pharma Ledger Ethereum Adapter Service
+    digest: 7dd3c4d9672d38a15636a6b9b1cb142ad2e1a06643f1137a4369116d720fb40b
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: ethadapter
+    type: application
+    urls:
+    - https://github.com/axiologic-pla/helm-charts/releases/download/ethadapter-0.7.19/ethadapter-0.7.19.tgz
+    version: 0.7.19
+  - apiVersion: v2
+    appVersion: 3.0.0
     created: "2024-04-24T11:37:58.201629886Z"
     description: A Helm chart for Pharma Ledger Ethereum Adapter Service
     digest: fab351ff2a6da83da96c66b11e8f90ca5ae0ee7215feb1b6acb89f28a55a01c7
@@ -107,4 +121,4 @@ entries:
     urls:
     - https://axiologic-pla.github.io/helm-charts/quorum-node-0.6.8.tgz
     version: 0.6.8
-generated: "2024-04-24T11:37:58.2016537Z"
+generated: "2024-04-24T11:39:33.35644328Z"
