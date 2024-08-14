@@ -33,17 +33,11 @@ data:
 {{- else }}
     export default {
       "appName": "Demiurge",
-      "vault": "server",
-      "agent": "browser",
-      "system":   "any",
-      "browser":  "any",
       "mode": "sso-direct",
       "vaultDomain":  {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote }},
       "didDomain":  {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote }},
       "enclaveType":"WalletDBEnclave",
-      "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }},
-      "sw": false,
-      "pwa": false
+      "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }}
     }
 {{- end }}
 
