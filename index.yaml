@@ -3,6 +3,18 @@ entries:
   epi:
   - apiVersion: v2
     appVersion: 3.0.0
+    created: "2024-08-14T13:51:01.992467887Z"
+    description: A Helm chart for Pharma Ledger epi (electronic product information)
+      application
+    digest: 7ff7610a3dbc1b446958fb863191b66ca2dd9f58df671b3ebe51e5b708c0b98d
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    name: epi
+    type: application
+    urls:
+    - https://github.com/axiologic-pla/helm-charts/releases/download/epi-0.7.14/epi-0.7.14.tgz
+    version: 0.7.14
+  - apiVersion: v2
+    appVersion: 3.0.0
     created: "2024-08-14T13:29:08.10454688Z"
     description: A Helm chart for Pharma Ledger epi (electronic product information)
       application
@@ -145,4 +157,4 @@ entries:
     urls:
     - https://axiologic-pla.github.io/helm-charts/quorum-node-0.6.8.tgz
     version: 0.6.8
-generated: "2024-08-14T13:29:08.104575474Z"
+generated: "2024-08-14T13:51:01.99251201Z"
