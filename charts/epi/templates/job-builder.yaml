@@ -101,7 +101,7 @@ spec:
             done
             echo "=======> Server is ready."
             echo "=======> Starting build process ..."
-            npm run build-all
+            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js buildApps"
             if test -d dsu-fabric-ssapp; then
                 npm run build-old-ssapps
             fi
