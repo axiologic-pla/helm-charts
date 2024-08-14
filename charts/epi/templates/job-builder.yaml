@@ -101,8 +101,10 @@ spec:
             done
             echo "=======> Server is ready."
             echo "=======> Starting build process ..."
-            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js epi-ssapps-and-wallets-build"
-            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./node_modules/octopus/scripts/run patch"
+            npm run build-all
+            if test -d dsu-fabric-ssapp; then
+                npm run build-old-ssapps
+            fi
             rc=$?
             echo "=======> Build process done - rc=$rc"
             if [ $rc -ne 0 ]
